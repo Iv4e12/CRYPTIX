@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c0b14">
+    <title>CRYPTIX | Web Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <h2>CRYPTIX</h2>
+                <span>WEB DEMO</span>
+            </div>
+        </div>
+
+        <p class="nav-label">WORKSPACE</p>
+
+        <button class="nav-item active" data-page="dashboard">⌂ Dashboard</button>
+        <button class="nav-item" data-page="encryption">♢ Encryption</button>
+        <button class="nav-item" data-page="hashing"># Hashing</button>
+        <button class="nav-item" data-page="password">⚿ Password Lab</button>
+        <button class="nav-item" data-page="cipher">⌘ Cipher Lab</button>
+
+        <p class="nav-label">UNAVAILABLE</p>
+
+        <button class="nav-item locked" data-page="vault">▣ Key Vault</button>
+        <button class="nav-item locked" data-page="history">◷ History</button>
+
+        <div class="sidebar-bottom">
+            <span class="online-dot"></span>
+            Browser demo
+            <p>CRYPTIX v1.0</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header>
+            <div>
+                <span class="eyebrow">CRYPTIX / WORKSPACE</span>
+                <h1 id="page-title">Dashboard</h1>
+            </div>
+            <span class="demo-badge">WEB DEMO</span>
+        </header>
+
+        <section id="dashboard" class="page active">
+            <div class="welcome">
+                <span class="eyebrow">WELCOME TO CRYPTIX</span>
+                <h2>Your cryptography workspace.</h2>
+                <p>Explore cryptographic tools directly in your browser.</p>
+            </div>
+
+            <h3 class="section-heading">AVAILABLE TOOLS</h3>
+
+            <div class="cards">
+                <button class="feature-card" data-open="encryption">
+                    <span class="card-icon">♢</span>
+                    <h3>Encryption</h3>
+                    <p>Encrypt and decrypt messages using AES-GCM.</p>
+                    <span class="card-link">OPEN TOOL →</span>
+                </button>
+
+                <button class="feature-card" data-open="hashing">
+                    <span class="card-icon">#</span>
+                    <h3>Hashing</h3>
+                    <p>Generate SHA-256 cryptographic hashes.</p>
+                    <span class="card-link">OPEN TOOL →</span>
+                </button>
+
+                <button class="feature-card" data-open="password">
+                    <span class="card-icon">⚿</span>
+                    <h3>Password Lab</h3>
+                    <p>Generate secure random passwords.</p>
+                    <span class="card-link">OPEN TOOL →</span>
+                </button>
+
+                <button class="feature-card" data-open="cipher">
+                    <span class="card-icon">⌘</span>
+                    <h3>Cipher Lab</h3>
+                    <p>Experiment with classical encryption.</p>
+                    <span class="card-link">OPEN TOOL →</span>
+                </button>
+            </div>
+
+            <div class="notice">
+                <strong>About this demo</strong>
+                <p>This is a limited browser version of CRYPTIX. Some features are only available in the desktop application.</p>
+            </div>
+        </section>
+
+        <section id="encryption" class="page">
+            <div class="panel">
+                <h2>AES-GCM Encryption</h2>
+                <p class="muted">Encrypt and decrypt text using your browser's Web Crypto API.</p>
+
+                <label>Password</label>
+                <input type="password" id="aes-password" placeholder="Enter an encryption password">
+
+                <label>Input text</label>
+                <textarea id="aes-input" placeholder="Enter text to encrypt or paste encrypted data..."></textarea>
+
+                <div class="button-row">
+                    <button class="primary" id="encrypt-btn">ENCRYPT</button>
+                    <button class="secondary" id="decrypt-btn">DECRYPT</button>
+                </div>
+
+                <label>Output</label>
+                <textarea id="aes-output" readonly placeholder="Your result will appear here..."></textarea>
+
+                <button class="secondary" id="copy-aes">COPY OUTPUT</button>
+                <p class="status" id="aes-status"></p>
+                <p class="small-note">Browser demo encryption uses PBKDF2 and AES-256-GCM. It is not compatible with the desktop app's Scrypt-based encryption.</p>
+            </div>
+        </section>
+
+        <section id="hashing" class="page">
+            <div class="panel">
+                <h2>Hashing Laboratory</h2>
+                <p class="muted">Generate SHA-256 hashes from text.</p>
+
+                <label>Input text</label>
+                <textarea id="hash-input" placeholder="Enter text to hash..."></textarea>
+
+                <button class="primary" id="hash-btn">GENERATE HASH</button>
+
+                <label>SHA-256 Result</label>
+                <textarea id="hash-output" readonly placeholder="Your hash will appear here..."></textarea>
+
+                <button class="secondary" id="copy-hash">COPY HASH</button>
+                <p class="status" id="hash-status"></p>
+            </div>
+        </section>
+
+        <section id="password" class="page">
+            <div class="panel">
+                <h2>Password Laboratory</h2>
+                <p class="muted">Generate random passwords using your browser's secure random generator.</p>
+
+                <label>Password length: <span id="length-value">20</span></label>
+                <input type="range" id="password-length" min="8" max="64" value="20">
+
+                <div class="checks">
+                    <label><input type="checkbox" id="upper" checked> Uppercase letters</label>
+                    <label><input type="checkbox" id="lower" checked> Lowercase letters</label>
+                    <label><input type="checkbox" id="numbers" checked> Numbers</label>
+                    <label><input type="checkbox" id="symbols" checked> Symbols</label>
+                </div>
+
+                <button class="primary" id="generate-password">GENERATE PASSWORD</button>
+
+                <label>Generated password</label>
+                <input type="text" id="password-output" readonly placeholder="Your password will appear here...">
+
+                <button class="secondary" id="copy-password">COPY PASSWORD</button>
+
+                <div class="password-analysis">
+                    <h3 id="strength">Strength: Not analyzed</h3>
+                    <p id="entropy">Estimated entropy: --</p>
+                </div>
+
+                <p class="status" id="password-status"></p>
+            </div>
+        </section>
+
+        <section id="cipher" class="page">
+            <div class="panel">
+                <h2>Cipher Laboratory</h2>
+                <p class="muted">Experiment with classical ciphers.</p>
+
+                <label>Select cipher</label>
+                <select id="cipher-type">
+                    <option value="caesar">Caesar</option>
+                    <option value="atbash">Atbash</option>
+                </select>
+
+                <div id="shift-container">
+                    <label>Shift value</label>
+                    <input type="number" id="shift-value" min="1" max="25" value="3">
+                </div>
+
+                <label>Input text</label>
+                <textarea id="cipher-input" placeholder="Enter text..."></textarea>
+
+                <div class="button-row">
+                    <button class="primary" id="cipher-encrypt">ENCRYPT</button>
+                    <button class="secondary" id="cipher-decrypt">DECRYPT</button>
+                </div>
+
+                <label>Output</label>
+                <textarea id="cipher-output" readonly placeholder="Result will appear here..."></textarea>
+
+                <button class="secondary" id="copy-cipher">COPY OUTPUT</button>
+                <p class="status" id="cipher-status"></p>
+            </div>
+        </section>
+
+        <section id="vault" class="page">
+            <div class="locked-panel">
+                <div class="lock-icon">▣</div>
+                <h2>Key Vault</h2>
+                <p>This is a demo. Install the program to access all features ;(</p>
+                <span class="demo-badge">DESKTOP FEATURE</span>
+            </div>
+        </section>
+
+        <section id="history" class="page">
+            <div class="locked-panel">
+                <div class="lock-icon">◷</div>
+                <h2>History</h2>
+                <p>This is a demo. Install the program to access all features ;(</p>
+                <span class="demo-badge">DESKTOP FEATURE</span>
+            </div>
+        </section>
+
+        <footer>
+            CRYPTIX v1.0 · Built with Python & PySide6
+        </footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
